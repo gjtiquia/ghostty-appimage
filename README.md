@@ -6,6 +6,12 @@ basically a way to use a customized Ghostty build to test PRs, and use the build
 configuration: 
 - edit the files `VERSION`, `GITHUB_REPO`, `GITHUB_BRANCH` 
 
+run:
+- go to GitHub Actions and dispatch the Build workflow
+
+download:
+- see Artifacts from the workflow
+
 ---
 
 <h1><p align="center">
