@@ -48,6 +48,13 @@ jobs:
         run: |
           ./bin/build-ghostty.sh
 
+      - name: Archive zig-out folder
+        run: |
+          GHOSTTY_VERSION="$(cat VERSION)"
+          ARCH="$(uname -m)"
+          mkdir -p ./dist
+          tar -czf ./dist/ghostty-zig-out-${GHOSTTY_VERSION}-${ARCH}.tar.gz -C ./ghostty-${GHOSTTY_VERSION} zig-out
+
       - name: Bundle AppImage
         run: |
           ./bin/bundle-appimage.sh
@@ -58,6 +65,13 @@ jobs:
           name: ghostty-appimage-${{ matrix.arch }}
           retention-days: 7
           path: dist
+
+      - name: Upload zig-out Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ghostty-zig-out-${{ matrix.arch }}
+          retention-days: 7
+          path: dist/ghostty-zig-out-*.tar.gz
 
   tag:
     name: "👻 Tip Tag"
