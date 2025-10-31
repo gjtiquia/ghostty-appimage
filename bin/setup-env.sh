@@ -4,13 +4,13 @@ set -eux
 
 get_latest_gh_release() {
 
-	gh_ref="${1}"
-	curl -s "https://api.github.com/repos/${gh_ref}/releases/latest" | jq -r .tag_name
+    gh_ref="${1}"
+    curl -s "https://api.github.com/repos/${gh_ref}/releases/latest" | jq -r .tag_name
 }
 
 # Update & install OS base dependencies
 buildDeps="base-devel freetype2 oniguruma wget mesa file zsync appstream xorg-server-xvfb patchelf binutils strace git jq"
-ghosttyDeps="gtk4 libadwaita gtk4-layer-shell"
+ghosttyDeps="gtk4 libadwaita gtk4-layer-shell blueprint-compiler"
 rm -rf "/usr/share/libalpm/hooks/package-cleanup.hook"
 pacman -Syuq --needed --noconfirm --noprogressbar ${buildDeps} ${ghosttyDeps}
 
@@ -27,7 +27,7 @@ MINISIGN_URL="${GH_BASE}/jedisct1/minisign/releases/download/${MINISIGN_VERSION}
 ZIG_PACKAGE_NAME="zig-linux-${ARCH}-${ZIG_VERSION}"
 
 if [ "${ZIG_VERSION}" != "0.14.0" ]; then
-	ZIG_PACKAGE_NAME="zig-${ARCH}-linux-${ZIG_VERSION}"
+    ZIG_PACKAGE_NAME="zig-${ARCH}-linux-${ZIG_VERSION}"
 fi
 
 ZIG_URL="https://ziglang.org/download/${ZIG_VERSION}/${ZIG_PACKAGE_NAME}.tar.xz"
@@ -67,7 +67,7 @@ chmod +x uruntime2appimage
 pacman -Scc --noconfirm
 
 rm -rf \
-	/tmp/appimagetool.AppImage \
-	/tmp/minisign-linux* \
-	/tmp/zig-linux.tar.xz \
-	/tmp/*.pkg.tar.zst
+    /tmp/appimagetool.AppImage \
+    /tmp/minisign-linux* \
+    /tmp/zig-linux.tar.xz \
+    /tmp/*.pkg.tar.zst
