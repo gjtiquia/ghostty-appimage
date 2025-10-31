@@ -3,9 +3,10 @@
 set -eux
 
 ARCH="$(uname -m)"
-GHOSTTY_REPO="https://github.com/pluiedev/ghostty"
-GHOSTTY_BRANCH="pluie/jj-uuurvsomytmv"
-GHOSTTY_DIR="ghostty"
+GHOSTTY_VERSION="$(cat VERSION)"
+GHOSTTY_REPO="$(cat GITHUB_REPO)"
+GHOSTTY_BRANCH="$(cat GITHUB_BRANCH)"
+GHOSTTY_DIR="ghostty-${GHOSTTY_VERSION}"
 
 rm -rf AppDir dist "${GHOSTTY_DIR}"
 
@@ -22,8 +23,6 @@ BUILD_ARGS="
 # Clone the repository and checkout the specific branch
 git clone --depth 1 --branch "${GHOSTTY_BRANCH}" "${GHOSTTY_REPO}" "${GHOSTTY_DIR}"
 
-# Hardcode version
-GHOSTTY_VERSION="1.3.0"
 BUILD_ARGS="${BUILD_ARGS} -Dversion-string=${GHOSTTY_VERSION}"
 
 (
