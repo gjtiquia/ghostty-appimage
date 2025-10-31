@@ -4,16 +4,7 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  schedule:
-    - cron: "0 0 * * *"
   workflow_dispatch: {}
-  pull_request:
-    paths-ignore:
-      - "**/*.md"
-      - "**/VERSION"
-    types: [opened, synchronize, reopened]
-  release:
-    types: [published]
 
 jobs:
   build_appimage:
@@ -51,13 +42,7 @@ jobs:
 
       - name: Setup build environment
         run: |
-          if [ "${{ github.event_name }}" == "schedule" ]; then
-            ZIG_VERSION=0.15.2
-            echo "tip" > VERSION
-          else
-            ZIG_VERSION=0.14.0
-          fi
-          ZIG_VERSION=$ZIG_VERSION ./bin/setup-env.sh
+          ZIG_VERSION=0.15.2 ./bin/setup-env.sh
 
       - name: Build Ghostty
         run: |
