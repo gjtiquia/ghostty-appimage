@@ -1,3 +1,12 @@
+
+this is a fork of [pkgforge-dev/ghostty-appimage](https://github.com/pkgforge-dev/ghostty-appimage) to build AppImages from git checkout instead of the nightly/stable builds
+
+edit `build-ghostty.sh` to set the repo url and the branch name
+
+basically a way to use a customized Ghostty build to test PRs, and use the build before it is merged and released
+
+---
+
 <h1><p align="center">
   <img src="./assets/ghostty.png" alt="Ghostty Logo" width="128">
   <img src="./assets/appimage.png" alt="AppImage Logo" width="128">
